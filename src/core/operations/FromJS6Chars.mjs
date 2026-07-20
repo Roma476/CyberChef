@@ -8,20 +8,19 @@ import Operation from "../Operation.mjs";
 import OperationError from "../errors/OperationError.mjs";
 
 /**
- * From JSFuck operation
+ * From JS6Chars operation
  */
-class FromJSFuck extends Operation {
+class FromJS6Chars extends Operation {
 
     /**
-     * FromJSFuck constructor
+     * FromJS6Chars constructor
      */
     constructor() {
         super();
 
-        this.name = "From JSFuck";
+        this.name = "From JS6Chars";
         this.module = "Default";
-        this.description = "Decodes JSFuck encoded JavaScript. JSFuck uses only 6 characters: <code>[</code>, <code>]</code>, <code>(</code>, <code>)</code>, <code>!</code> and <code>+</code>.<br><br>e.g.  <code>[][(![]+[])[+[]]+...]</code> becomes <code>alert(1)</code>";
-        this.infoURL = "https://wikipedia.org/wiki/JSFuck";
+        this.description = "Decodes JavaScript that has been obfuscated using only 6 characters: <code>[</code>, <code>]</code>, <code>(</code>, <code>)</code>, <code>!</code> and <code>+</code>. This technique exploits JavaScript's type coercion rules to construct executable code from a minimal character set.<br><br>e.g.  <code>[][(![]+[])[+[]]+...]</code> becomes <code>alert(1)</code>";
         this.inputType = "string";
         this.outputType = "string";
         this.args = [];
@@ -44,10 +43,10 @@ class FromJSFuck extends Operation {
         try {
             return String(Function("\"use strict\"; return (" + input + ")")());
         } catch (err) {
-            throw new OperationError("Unable to decode JSFuck: " + err.message);
+            throw new OperationError("Unable to decode: " + err.message);
         }
     }
 
 }
 
-export default FromJSFuck;
+export default FromJS6Chars;
